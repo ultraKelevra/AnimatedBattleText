@@ -15,11 +15,11 @@ MonoBehaviour:
   font: {fileID: 11400000, guid: 92aaefc9b37dfc04f94749d129a632c0, type: 2}
   textSize: 16
   alignment: 1
-  transitionInDuration: 1
+  transitionInDuration: 1.25
   perLetterDelay: 0.05
   invertDelay: 0
-  initialLetterSpacing: 18
-  finalLetterSpacing: 18
+  initialLetterSpacing: 20
+  finalLetterSpacing: 25
   pivotCurve:
     serializedVersion: 2
     m_Curve:
@@ -149,7 +149,7 @@ MonoBehaviour:
     atime0: 0
     atime1: 13107
     atime2: 52428
-    atime3: 65535
+    atime3: 55898
     atime4: 0
     atime5: 0
     atime6: 0
@@ -178,8 +178,8 @@ MonoBehaviour:
     ctime7: 0
     atime0: 0
     atime1: 13107
-    atime2: 62258
-    atime3: 65535
+    atime2: 52621
+    atime3: 58982
     atime4: 0
     atime5: 0
     atime6: 0

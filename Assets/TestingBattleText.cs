@@ -8,7 +8,7 @@ public class TestingBattleText : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
-            PixelBattleTextController.DisplayText("Hello World!", textAnimation, Vector3.zero);
+            PixelBattleTextController.DisplayText("Hello World!", textAnimation, Vector3.one * 0.5f);
     }
 }
 

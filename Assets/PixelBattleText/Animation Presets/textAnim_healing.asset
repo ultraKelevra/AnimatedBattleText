@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: textAnim_healing
   m_EditorClassIdentifier: Assembly-CSharp::TextAnimation
   font: {fileID: 11400000, guid: 92aaefc9b37dfc04f94749d129a632c0, type: 2}
-  textSize: 32
+  textSize: 16
   alignment: 1
   transitionInDuration: 1
   perLetterDelay: 0.075
   invertDelay: 0
-  initialLetterSpacing: 40
-  finalLetterSpacing: 40
+  initialLetterSpacing: 30
+  finalLetterSpacing: 30
   pivotCurve:
     serializedVersion: 2
     m_Curve:

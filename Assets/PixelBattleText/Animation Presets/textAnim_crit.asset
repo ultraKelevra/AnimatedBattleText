@@ -18,8 +18,8 @@ MonoBehaviour:
   transitionInDuration: 0.75
   perLetterDelay: 0.05
   invertDelay: 0
-  initialLetterSpacing: 36
-  finalLetterSpacing: 36
+  initialLetterSpacing: 50
+  finalLetterSpacing: 50
   pivotCurve:
     serializedVersion: 2
     m_Curve:

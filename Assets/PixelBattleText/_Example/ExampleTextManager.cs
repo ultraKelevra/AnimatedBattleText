@@ -46,7 +46,7 @@ namespace AnimatedBattleText.Examples
 		}
 
 		public void DisplayDamage(){
-			DisplayDamage(textSpawnPosition, 125);
+			DisplayDamage(textSpawnPosition, UnityEngine.Random.Range(100,999));
 				lastUsed = damageAnimatedBattleTextProps;
 		}
 
@@ -71,7 +71,7 @@ namespace AnimatedBattleText.Examples
 		public void DisplayCritalDamage(float3 p, int damage)
 		{
 			PixelBattleTextController.
-				DisplayText("CRITICAL!", criticalAnimatedBattleTextAnimatedBattleTextProps, p + new float3(0, .6f, 0));
+				DisplayText("CRITICAL!", criticalAnimatedBattleTextAnimatedBattleTextProps, p + new float3(0, 0.13f, 0));
 			PixelBattleTextController.
 				DisplayText(damage.ToString(), criticalDamageAnimatedBattleTextProps, p);
 		}
@@ -103,7 +103,7 @@ namespace AnimatedBattleText.Examples
 		public void DisplayKO(float3 p)
 		{
 			PixelBattleTextController.
-				DisplayText("KO", KOProps, p);
+				DisplayText("K.O", KOProps, p);
 		}
 	}
 }

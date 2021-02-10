@@ -16,7 +16,7 @@ namespace PixelBattleText
 		private int _texelOffset_id = Shader.PropertyToID("_TexelOffset");
 		public static PixelBattleTextController singleton;
 		// public GameObject textPrefab;
-		public Transform canvas;
+		public Canvas canvas;
 
 		private Shader borderShader;
 		private List<TMP_Text[]> letters;
@@ -29,7 +29,7 @@ namespace PixelBattleText
 			TMP_Text[] text;
 			if (unusedLetters.Count == 0)
 			{
-				var i = Instantiate(textPrefab, canvas, false);
+				var i = Instantiate(textPrefab, canvas.transform, false);
 				text = i.GetComponentsInChildren<TMP_Text>();
 			}
 			else
@@ -81,6 +81,9 @@ namespace PixelBattleText
 		
 		private void _DisplayText(string word, TextAnimation textAnimation, float3 position)
 		{
+			position.x *= canvas.pixelRect.width;
+			position.y *= canvas.pixelRect.height;
+
 			Transform[] letterTransforms = new Transform[word.Length];
 			TMP_Text[][] wordGraphics = new TMP_Text[word.Length][];
 			for (int i = 0; i < word.Length; i++)
@@ -98,14 +101,23 @@ namespace PixelBattleText
 
 				wordGraphics[i][0].text = character;
 				wordGraphics[i][1].text = character;
-				
+
+				var alignmentConfig = textAnimation.alignment == TextAnimation.TextAnimationAlignment.Center?
+						HorizontalAlignmentOptions.Center
+						: textAnimation.alignment == TextAnimation.TextAnimationAlignment.Right?
+							HorizontalAlignmentOptions.Right
+							: HorizontalAlignmentOptions.Left;
+
+				wordGraphics[i][0].horizontalAlignment = alignmentConfig;
+				wordGraphics[i][1].horizontalAlignment = alignmentConfig;
+
 				letterTransforms[i] = wordGraphics[i][0].transform.parent;
 			}
 
 			var alignmentOffset = textAnimation.alignment == TextAnimation.TextAnimationAlignment.Center?
-						-(textAnimation.finalLetterSpacing * word.Length)/2.0f
+						-(textAnimation.finalLetterSpacing * (word.Length-1))/2.0f
 						: textAnimation.alignment == TextAnimation.TextAnimationAlignment.Right?
-							-textAnimation.finalLetterSpacing * word.Length
+							-textAnimation.finalLetterSpacing * (word.Length - 1)
 							: 0;
 
 			var animatedText = new AnimatedTextInstace()
