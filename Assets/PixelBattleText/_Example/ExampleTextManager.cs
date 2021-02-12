@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
+using UnityEngine.UI;
 using PixelBattleText;
 using TMPro;
 
@@ -11,21 +12,57 @@ namespace AnimatedBattleText.Examples
 	{
 		public float3 textSpawnPosition;
 		private TextAnimation lastUsed;
-		public TextAnimation missAnimatedBattleTextProps;
-		public TextAnimation damageAnimatedBattleTextProps;
-		public TextAnimation healAnimatedBattleTextProps;
-		public TextAnimation criticalDamageAnimatedBattleTextProps;
-		public TextAnimation criticalAnimatedBattleTextAnimatedBattleTextProps;
-		public TextAnimation KOProps;
-		public TextAnimation LvlUpProps;
+
+		public TextAnimation miss;
+		public TextAnimation ko;
+		public TextAnimation lvlUp;
+		public TextAnimation premium;
+		public TextAnimation spooky;
+		public TextAnimation venom;
+
+		public TextAnimation pyro;
+		public TextAnimation shock;
+		public TextAnimation freeze;
+
+		public TextAnimation metallic;
+		public TextAnimation criticalNumber;
+		public TextAnimation criticalText;
+		public TextAnimation damage;
+		public TextAnimation heal;
+
 		public TMP_InputField input;
+		
+		public GameObject pallete_0;
+		public GameObject pallete_1;
+		private bool displayingPallete_0 = true;
+		private Image lastButton;
 		
 		void Start()
 		{
-			lastUsed = LvlUpProps;
+			lastUsed = lvlUp;
 		}
 
+		public Color[] outlineColors;
+		public Image textbox;
+		public Image button;
 #region UI DUMMY CONTROLS
+		public void SetColor(int col){
+			textbox.color = outlineColors[col];
+			button.color = outlineColors[col];
+		}
+		private void SwapColors(Image source, Color color)
+		{
+			if(lastButton)
+				lastButton.color = Color.white;
+			source.color = color;
+		}
+
+		public void SwapEffectPallete()
+		{
+			displayingPallete_0 = ! displayingPallete_0;
+			pallete_0.SetActive(displayingPallete_0);
+			pallete_1.SetActive(!displayingPallete_0);
+		}
 
 		public void ShowInputText()
 		{
@@ -33,77 +70,142 @@ namespace AnimatedBattleText.Examples
 			PixelBattleTextController.DisplayText(text, lastUsed, textSpawnPosition);
 		}
 
-		public void DisplayHealing()
+		public void DisplayPremium()
 		{
-			DisplayHealing(textSpawnPosition, 999);
-			lastUsed = healAnimatedBattleTextProps;
+			PixelBattleTextController.DisplayText(
+				"PREMIUM",
+				premium,
+				textSpawnPosition);
+
+			lastUsed = premium;
+		}
+
+		public void DisplaySpooky()
+		{
+			PixelBattleTextController.DisplayText(
+				"SPOOKY...",
+				spooky,
+				textSpawnPosition);
+
+			lastUsed = spooky;
+		}
+
+		public void DisplayPyro()
+		{
+			PixelBattleTextController.DisplayText(
+				UnityEngine.Random.Range(100,999).ToString(),
+				pyro,
+				textSpawnPosition);
+			
+			lastUsed = pyro;
+		}
+
+		public void DisplayMetallic()
+		{
+			PixelBattleTextController.DisplayText(
+				UnityEngine.Random.Range(100,999).ToString(),
+				metallic,
+				textSpawnPosition);
+
+			lastUsed = metallic;
 		}
 		
-		public void DisplayCritalDamage(){
-			DisplayCritalDamage(textSpawnPosition, 9999);
-				lastUsed = criticalDamageAnimatedBattleTextProps;
+		public void DisplayFreeze()
+		{
+			PixelBattleTextController.DisplayText(
+				UnityEngine.Random.Range(100,999).ToString(),
+				freeze,
+				textSpawnPosition);
 
+			lastUsed = freeze;
 		}
 
-		public void DisplayDamage(){
-			DisplayDamage(textSpawnPosition, UnityEngine.Random.Range(100,999));
-				lastUsed = damageAnimatedBattleTextProps;
-		}
+		public void DisplayShock()
+		{
+			PixelBattleTextController.DisplayText(
+				UnityEngine.Random.Range(100,999).ToString(),
+				shock,
+				textSpawnPosition);
 
-		public void DisplayMiss(){
-			DisplayMiss(textSpawnPosition);
-			lastUsed = missAnimatedBattleTextProps;
+			lastUsed = shock;
 		}
 
 		public void DisplayLvlUp()
 		{
-			DisplayLvlUp(textSpawnPosition);
-			lastUsed = LvlUpProps;
+			PixelBattleTextController.DisplayText(
+				"LEVEL UP!",
+				lvlUp,
+				textSpawnPosition);
+
+			lastUsed = lvlUp;
+		}
+		
+		public void DisplayDamage()
+		{
+			PixelBattleTextController.DisplayText(
+				UnityEngine.Random.Range(100,999).ToString(),
+				damage,
+				textSpawnPosition);
+
+			lastUsed = damage;
 		}
 
-		public void DisplayKO(){
-			DisplayKO(textSpawnPosition);
-			lastUsed = KOProps;
+		public void DisplayKO()
+		{
+			PixelBattleTextController.DisplayText(
+				"KO",
+				ko,
+				textSpawnPosition);
+
+			lastUsed = ko;
+		}
+
+		public void DisplayVenom()
+		{
+			PixelBattleTextController.DisplayText(
+				"VENOM",
+				venom,
+				textSpawnPosition);
+
+			lastUsed = venom;
+		}
+
+		public void DisplayMiss()
+		{
+			PixelBattleTextController.DisplayText(
+				"MISS",
+				miss,
+				textSpawnPosition);
+
+			lastUsed = miss;
+		}
+
+		public void DisplayHeal()
+		{
+			PixelBattleTextController.DisplayText(
+				UnityEngine.Random.Range(100,999).ToString(),
+				heal,
+				textSpawnPosition);
+
+			lastUsed = heal;
+		}
+
+		public void DisplayCrit()
+		{
+			PixelBattleTextController.DisplayText(
+				UnityEngine.Random.Range(6780,9999).ToString(),
+				criticalNumber,
+				textSpawnPosition);
+
+
+			PixelBattleTextController.DisplayText(
+				"CRITICAL!",
+				criticalText,
+				textSpawnPosition + new float3(0,0.25f,0));
+
+			lastUsed = criticalNumber;
 		}
 
 #endregion
-
-		public void DisplayCritalDamage(float3 p, int damage)
-		{
-			PixelBattleTextController.
-				DisplayText("CRITICAL!", criticalAnimatedBattleTextAnimatedBattleTextProps, p + new float3(0, 0.25f, 0));
-			PixelBattleTextController.
-				DisplayText(damage.ToString(), criticalDamageAnimatedBattleTextProps, p);
-		}
-
-		public void DisplayDamage(float3 p, int damage)
-		{
-			PixelBattleTextController.
-				DisplayText(damage.ToString(), damageAnimatedBattleTextProps, p);
-		}
-
-		public void DisplayHealing(float3 p, int healing)
-		{
-			PixelBattleTextController.
-				DisplayText(healing.ToString(), healAnimatedBattleTextProps, p);
-		}
-
-		public void DisplayMiss(float3 p)
-		{
-			PixelBattleTextController.
-				DisplayText("MISS", missAnimatedBattleTextProps, p);
-		}
-
-		public void DisplayLvlUp(float3 p)
-		{
-			PixelBattleTextController.
-				DisplayText("LEVEL UP!", LvlUpProps, p);
-		}
-
-		public void DisplayKO(float3 p)
-		{
-			PixelBattleTextController.
-				DisplayText("K.O", KOProps, p);
-		}
 	}
 }

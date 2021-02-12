@@ -201,9 +201,13 @@ namespace PixelBattleText
 					var letterPivot = new float2(
 						lerp(props.initialSpacing * j, props.endSpacing * j, pivotT), 0);
 
-					var additivePosT = props.offsetCurve.Evaluate(t);
-					var letterAdditivePos =
-						lerp(props.initialOffset, props.endOffset, additivePosT);
+					var additivePosXT = props.offsetCurveX.Evaluate(t);
+					var additivePosYT = props.offsetCurveY.Evaluate(t);
+
+					var additiveX = lerp(props.initialOffset.x, props.endOffset.x, additivePosXT);
+					var additiveY = lerp(props.initialOffset.y, props.endOffset.y, additivePosYT);
+
+					var letterAdditivePos = new float2(additiveX, additiveY);
 
 					var pixelPosition = (pos + letterPivot + letterAdditivePos);
 					

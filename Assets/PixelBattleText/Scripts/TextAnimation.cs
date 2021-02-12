@@ -33,7 +33,8 @@ namespace PixelBattleText
 		[Header("Offset Animation")]
 		public int2 initialOffset = int2.zero;
 		public int2 endOffset = int2.zero;
-		public AnimationCurve offsetCurve = AnimationCurve.Constant(0, 1, 1);
+		public AnimationCurve offsetCurveX = AnimationCurve.Constant(0, 1, 1);
+		public AnimationCurve offsetCurveY = AnimationCurve.Constant(0, 1, 1);
 
 		[Header("Color Animation")]
 		public Gradient fillColorInTime;

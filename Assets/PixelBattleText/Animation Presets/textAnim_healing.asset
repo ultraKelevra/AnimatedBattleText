@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TextAnimation
   font: {fileID: 11400000, guid: 554d25ed6addaf34f9824d8cfe5a5d44, type: 2}
   textSize: 16
-  alignment: 0
+  alignment: 1
   transitionDuration: 0.75
   perLetterDelay: 0.075
   invertAnimationOrder: 0
   initialSpacing: 8
-  endSpacing: 9
+  endSpacing: 8
   spacingCurve:
     serializedVersion: 2
     m_Curve:
@@ -50,7 +50,31 @@ MonoBehaviour:
   endOffset:
     x: 0
     y: 0
-  offsetCurve:
+  offsetCurveX:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  offsetCurveY:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3

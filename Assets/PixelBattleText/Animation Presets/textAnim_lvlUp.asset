@@ -18,8 +18,8 @@ MonoBehaviour:
   transitionDuration: 2
   perLetterDelay: 0.05
   invertAnimationOrder: 0
-  initialSpacing: 15
-  endSpacing: 9
+  initialSpacing: 18
+  endSpacing: 18
   spacingCurve:
     serializedVersion: 2
     m_Curve:
@@ -72,12 +72,54 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   initialOffset:
-    x: -3
-    y: -10
+    x: 5
+    y: -15
   endOffset:
-    x: 0
-    y: 0
-  offsetCurve:
+    x: -5
+    y: 15
+  offsetCurveX:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.009689331
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.3
+      value: 1.35
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 0.7
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6031691
+      value: 1.0096893
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.4730349
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  offsetCurveY:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
