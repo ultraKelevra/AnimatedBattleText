@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using PixelBattleText;
 
-public class TestingBattleText : MonoBehaviour
+public class TestingPixelBattleText : MonoBehaviour
 {
     public TextAnimation textAnimation;
 

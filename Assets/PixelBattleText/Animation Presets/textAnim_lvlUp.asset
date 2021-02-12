@@ -15,12 +15,12 @@ MonoBehaviour:
   font: {fileID: 11400000, guid: 554d25ed6addaf34f9824d8cfe5a5d44, type: 2}
   textSize: 32
   alignment: 1
-  transitionInDuration: 2
+  transitionDuration: 2
   perLetterDelay: 0.05
-  invertDelay: 0
-  initialLetterSpacing: 3
-  finalLetterSpacing: 23
-  pivotCurve:
+  invertAnimationOrder: 0
+  initialSpacing: 15
+  endSpacing: 9
+  spacingCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -33,8 +33,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.20301819
-      value: 1.2807693
+      time: 0.25
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -42,7 +42,16 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.39934087
+      time: 0.5
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.75
       value: 1
       inSlope: 0
       outSlope: 0
@@ -52,23 +61,23 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  initialLetterAdditivePos:
-    x: 8
-    y: 15
-  finalLetterAdditivePos:
-    x: -8
-    y: -15
-  additivePosCurve:
+  initialOffset:
+    x: -3
+    y: -10
+  endOffset:
+    x: 0
+    y: 0
+  offsetCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -123,8 +132,8 @@ MonoBehaviour:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 0}
     key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 1, g: 1, b: 1, a: 1}
-    key3: {r: 1, g: 0.7153528, b: 0.495283, a: 0}
+    key2: {r: 0, g: 0, b: 0, a: 1}
+    key3: {r: 1, g: 1, b: 1, a: 0}
     key4: {r: 1, g: 1, b: 1, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
@@ -132,7 +141,7 @@ MonoBehaviour:
     ctime0: 0
     ctime1: 65535
     ctime2: 65535
-    ctime3: 57440
+    ctime3: 65535
     ctime4: 65535
     ctime5: 0
     ctime6: 0
@@ -141,7 +150,7 @@ MonoBehaviour:
     atime1: 3277
     atime2: 62258
     atime3: 65535
-    atime4: 0
+    atime4: 65535
     atime5: 0
     atime6: 0
     atime7: 0

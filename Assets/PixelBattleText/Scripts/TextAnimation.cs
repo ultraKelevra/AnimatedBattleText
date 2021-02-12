@@ -5,7 +5,7 @@ using TMPro;
 
 namespace PixelBattleText
 {
-	[CreateAssetMenu(fileName = "newTextAnimation", menuName = "BattleText/TextAnimation")]
+	[CreateAssetMenu(fileName = "newTextAnimation", menuName = "PixelBattleText/TextAnimation")]
 	public class TextAnimation: ScriptableObject
 	{
 		public enum TextAnimationAlignment
@@ -21,24 +21,23 @@ namespace PixelBattleText
 		public TextAnimationAlignment alignment;
 
 		[Header("Time Controls")]
-		public float transitionInDuration = .5f;
+		public float transitionDuration = .5f;
 		public float perLetterDelay = 0.05f;
-		public bool invertDelay = false;
+		public bool invertAnimationOrder = false;
 		
 		[Header("Spacing Animation")]
-		public float initialLetterSpacing = (1 / 32.0f) * 8;
-		public float finalLetterSpacing = (1 / 32.0f) * 8;
-		public AnimationCurve pivotCurve = AnimationCurve.Constant(0, 1, 1);
+		public float initialSpacing = 9;
+		public float endSpacing = 9;
+		public AnimationCurve spacingCurve = AnimationCurve.Constant(0, 1, 1);
 
-		[Header("Displace Animation")]
-		public int2 initialLetterAdditivePos = int2.zero;
-		public int2 finalLetterAdditivePos = int2.zero;
-		public AnimationCurve additivePosCurve = AnimationCurve.Constant(0, 1, 1);
+		[Header("Offset Animation")]
+		public int2 initialOffset = int2.zero;
+		public int2 endOffset = int2.zero;
+		public AnimationCurve offsetCurve = AnimationCurve.Constant(0, 1, 1);
 
 		[Header("Color Animation")]
 		public Gradient fillColorInTime;
 		public bool haveBorder;
 		public Gradient borderColorInTime;
-
 	}
 }

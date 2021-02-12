@@ -197,6 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 509947041}
   - component: {fileID: 509947042}
+  - component: {fileID: 509947043}
   m_Layer: 0
   m_Name: PixelTextController
   m_TagString: Untagged
@@ -230,7 +231,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b637735cad37ca8419c5d8684f22f34f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 1568964813}
+  canvas: {fileID: 1568964814}
+  snapToPixelGrid: 0
+--- !u!114 &509947043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509947040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bfb7ca18f9d91d489ed31753792913e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textAnimation: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

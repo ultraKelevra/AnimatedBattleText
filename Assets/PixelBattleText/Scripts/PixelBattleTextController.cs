@@ -121,9 +121,9 @@ namespace PixelBattleText
 			}
 
 			var alignmentOffset = textAnimation.alignment == TextAnimation.TextAnimationAlignment.Center?
-						-(textAnimation.finalLetterSpacing * (word.Length-1))/2.0f
+						-(textAnimation.endSpacing * (word.Length-1))/2.0f
 						: textAnimation.alignment == TextAnimation.TextAnimationAlignment.Right?
-							-textAnimation.finalLetterSpacing * (word.Length - 1)
+							-textAnimation.endSpacing * (word.Length - 1)
 							: 0;
 
 			var animatedText = new AnimatedTextInstace()
@@ -136,7 +136,6 @@ namespace PixelBattleText
 				active = false,
 			};
 
-			Debug.Log("alignment position: " + position.xy + new float2(alignmentOffset, 0));
 			animatedTexts.Add(animatedText);
 		}
 
@@ -171,7 +170,7 @@ namespace PixelBattleText
 				var transforms = text.letterTransforms;
 				var start = text.startTime;
 				var pos = text.pos;
-				var duration = props.transitionInDuration;
+				var duration = props.transitionDuration;
 				var delay = props.perLetterDelay;
 
 				if (!text.active)
@@ -192,19 +191,19 @@ namespace PixelBattleText
 				for (int j = 0; j < letters.Length; j++)
 				{
 					//spacing and position
-					var letterStart =   start + delay * (props.invertDelay ? letters.Length - j : j);
+					var letterStart =   start + delay * (props.invertAnimationOrder ? letters.Length - j : j);
 					var letterEnd = letterStart + duration;
 
 					//t is a frame independent progress counter (0-1) one or above means the transition has finished
 					var t = saturate(unlerp(letterStart, letterEnd, Time.time));
 
-					var pivotT = props.pivotCurve.Evaluate(t);
+					var pivotT = props.spacingCurve.Evaluate(t);
 					var letterPivot = new float2(
-						lerp(props.initialLetterSpacing * j, props.finalLetterSpacing * j, pivotT), 0);
+						lerp(props.initialSpacing * j, props.endSpacing * j, pivotT), 0);
 
-					var additivePosT = props.additivePosCurve.Evaluate(t);
+					var additivePosT = props.offsetCurve.Evaluate(t);
 					var letterAdditivePos =
-						lerp(props.initialLetterAdditivePos, props.finalLetterAdditivePos, additivePosT);
+						lerp(props.initialOffset, props.endOffset, additivePosT);
 
 					var pixelPosition = (pos + letterPivot + letterAdditivePos);
 					
