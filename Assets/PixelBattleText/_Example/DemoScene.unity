@@ -423,7 +423,6 @@ MonoBehaviour:
     x: 0.5
     y: 0.75
     z: 0
-  miss: {fileID: 11400000, guid: db310d6ae01355c4dacb850f33725891, type: 2}
   ko: {fileID: 11400000, guid: e735aba2faa2f9b4c834fb7b2c98a9ee, type: 2}
   lvlUp: {fileID: 11400000, guid: 6ab249a1ad3a83741b331d06cbe39997, type: 2}
   premium: {fileID: 11400000, guid: 917726a8110ae61468b1fd1eb8946c17, type: 2}
@@ -443,7 +442,7 @@ MonoBehaviour:
   outlineColors:
   - {r: 1, g: 0.85098046, b: 0.3529412, a: 1}
   - {r: 0.6313726, g: 1, b: 0, a: 1}
-  - {r: 0.454902, g: 0.6156863, b: 0.8862746, a: 1}
+  - {r: 0.9058824, g: 0.24705884, b: 0.23529413, a: 1}
   - {r: 0.9686275, g: 0.427451, b: 1, a: 1}
   - {r: 0.6745098, g: 0.87843144, b: 0.77647066, a: 1}
   - {r: 1, g: 0.23137257, b: 0.4156863, a: 1}
@@ -1771,7 +1770,7 @@ GameObject:
   - component: {fileID: 668961753}
   - component: {fileID: 668961752}
   m_Layer: 5
-  m_Name: btn_miss
+  m_Name: btn_damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1841,7 +1840,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 44244422}
-        m_MethodName: DisplayMiss
+        m_MethodName: DisplayDamage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4429,7 +4428,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: miss
+  m_text: damage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 554d25ed6addaf34f9824d8cfe5a5d44, type: 2}
   m_sharedMaterial: {fileID: 5547366144680400538, guid: 554d25ed6addaf34f9824d8cfe5a5d44,
@@ -4439,8 +4438,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293041524
-  m_fontColor: {r: 0.45594516, g: 0.61619896, b: 0.8867924, a: 1}
+    rgba: 4282138599
+  m_fontColor: {r: 0.9056604, g: 0.24809405, b: 0.23495908, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

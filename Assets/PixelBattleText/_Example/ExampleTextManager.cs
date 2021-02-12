@@ -13,7 +13,6 @@ namespace AnimatedBattleText.Examples
 		public float3 textSpawnPosition;
 		private TextAnimation lastUsed;
 
-		public TextAnimation miss;
 		public TextAnimation ko;
 		public TextAnimation lvlUp;
 		public TextAnimation premium;
@@ -168,16 +167,6 @@ namespace AnimatedBattleText.Examples
 				textSpawnPosition);
 
 			lastUsed = venom;
-		}
-
-		public void DisplayMiss()
-		{
-			PixelBattleTextController.DisplayText(
-				"MISS",
-				miss,
-				textSpawnPosition);
-
-			lastUsed = miss;
 		}
 
 		public void DisplayHeal()

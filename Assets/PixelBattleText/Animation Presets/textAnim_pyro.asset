@@ -45,10 +45,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   initialOffset:
-    x: -4
+    x: -3
     y: -5
   endOffset:
-    x: 4
+    x: 3
     y: 5
   offsetCurveX:
     serializedVersion: 2
@@ -72,8 +72,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.25
-      value: 1
+      time: 0.2096405
+      value: 0.82564163
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -83,24 +83,24 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.3753945
       value: 0.49763298
-      inSlope: -0.1029595
-      outSlope: -0.1029595
+      inSlope: -0.43320858
+      outSlope: -0.43320858
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.58895636
+      outWeight: 0.2622228
     - serializedVersion: 3
       time: 0.62541914
       value: 0.50251484
-      inSlope: -0.5951034
-      outSlope: -0.5951034
+      inSlope: 0.6855478
+      outSlope: 0.6855478
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.69104165
+      outWeight: 0.6310499
     - serializedVersion: 3
-      time: 0.75
-      value: 1
+      time: 0.7649536
+      value: 0.8384628
       inSlope: 0
       outSlope: 0
       tangentMode: 0
