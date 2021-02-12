@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9b5a2fa13c14043b661731755e41a4, type: 3}
   m_Name: textAnim_crit
   m_EditorClassIdentifier: Assembly-CSharp::TextAnimation
-  font: {fileID: 11400000, guid: 92aaefc9b37dfc04f94749d129a632c0, type: 2}
+  font: {fileID: 11400000, guid: 554d25ed6addaf34f9824d8cfe5a5d44, type: 2}
   textSize: 32
   alignment: 1
   transitionInDuration: 0.75
   perLetterDelay: 0.05
   invertDelay: 0
-  initialLetterSpacing: 50
-  finalLetterSpacing: 50
+  initialLetterSpacing: 15
+  finalLetterSpacing: 15
   pivotCurve:
     serializedVersion: 2
     m_Curve:

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6fb07f79db4e9a348880fd1d5fd3e893
+guid: 9ca52623ee8001b4ca7c29dc2ff6317d
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Pixel Millennium
+  fontName: Alphapix
   fontNames:
-  - pixel_font
+  - Alphapix
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

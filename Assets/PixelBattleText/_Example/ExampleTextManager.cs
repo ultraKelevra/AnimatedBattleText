@@ -71,7 +71,7 @@ namespace AnimatedBattleText.Examples
 		public void DisplayCritalDamage(float3 p, int damage)
 		{
 			PixelBattleTextController.
-				DisplayText("CRITICAL!", criticalAnimatedBattleTextAnimatedBattleTextProps, p + new float3(0, 0.13f, 0));
+				DisplayText("CRITICAL!", criticalAnimatedBattleTextAnimatedBattleTextProps, p + new float3(0, 0.25f, 0));
 			PixelBattleTextController.
 				DisplayText(damage.ToString(), criticalDamageAnimatedBattleTextProps, p);
 		}

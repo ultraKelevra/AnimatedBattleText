@@ -15,21 +15,24 @@ namespace PixelBattleText
 	{
 		private int _texelOffset_id = Shader.PropertyToID("_TexelOffset");
 		public static PixelBattleTextController singleton;
-		// public GameObject textPrefab;
-		public Canvas canvas;
 
+		///<summary>The root object on wich </summary>
+		public RectTransform canvas;
+		public bool snapToPixelGrid;
 		private Shader borderShader;
 		private List<TMP_Text[]> letters;
 		private Queue<TMP_Text[]> unusedLetters;
 		private List<AnimatedTextInstace> animatedTexts = new List<AnimatedTextInstace>();
 		private Dictionary<TextAnimation, Material> fontMaterials = new Dictionary<TextAnimation, Material>();
-		
+		// private RectTransform canvasTransform;
+		private GameObject textPrefab;
+
 		private TMP_Text[] GetNewText()
 		{
 			TMP_Text[] text;
 			if (unusedLetters.Count == 0)
 			{
-				var i = Instantiate(textPrefab, canvas.transform, false);
+				var i = Instantiate(textPrefab, canvas, false);
 				text = i.GetComponentsInChildren<TMP_Text>();
 			}
 			else
@@ -40,13 +43,7 @@ namespace PixelBattleText
 			return text;
 		}
 
-		///<summary>
-		///Displays and animates an efimeral text UI element at a given position in 2D world space
-		///</summary>
-		///<param name="word"> The string to display</param>
-		///<param name="textAnimation"> Parameters for animating every letter</param>
-		///<param name="position"> Position for where to display the text (world space)</param>
-		private Material GetFontMaterial(TextAnimation textAnimation)
+				private Material GetFontMaterial(TextAnimation textAnimation)
 		{
 #if UNITY_EDITOR
 			//if no material is related to this TextAnimation => generate it and realte to this TextAnimation
@@ -72,18 +69,25 @@ namespace PixelBattleText
 				fontMaterials[textAnimation] = mat;
 			}
 			return fontMaterials[textAnimation];
+			
 #endif
 		}
 		
+		///<summary>
+		///Displays and animates an efimeral text UI element at a given position in 2D world space
+		///</summary>
+		///<param name="word"> The string to display</param>
+		///<param name="textAnimation"> Parameters for animating every letter</param>
+		///<param name="position"> Position for where to display the text (world space)</param>
 		public static void DisplayText(string word, TextAnimation textAnimation, float3 position){
 			singleton._DisplayText(word, textAnimation, position);
 		}
-		
+
 		private void _DisplayText(string word, TextAnimation textAnimation, float3 position)
 		{
-			position.x *= canvas.pixelRect.width;
-			position.y *= canvas.pixelRect.height;
-
+			position.x *= canvas.rect.width;
+			position.y *= canvas.rect.height;
+			
 			Transform[] letterTransforms = new Transform[word.Length];
 			TMP_Text[][] wordGraphics = new TMP_Text[word.Length][];
 			for (int i = 0; i < word.Length; i++)
@@ -91,24 +95,26 @@ namespace PixelBattleText
 				string character = word[i].ToString();
 				wordGraphics[i] = GetNewText();
 
-				if(textAnimation.font)
-				{
-					wordGraphics[i][0].font = textAnimation.font;
-					wordGraphics[i][1].font = textAnimation.font;
-				}
-
-				wordGraphics[i][0].fontMaterial = GetFontMaterial(textAnimation);
-
-				wordGraphics[i][0].text = character;
-				wordGraphics[i][1].text = character;
-
 				var alignmentConfig = textAnimation.alignment == TextAnimation.TextAnimationAlignment.Center?
 						HorizontalAlignmentOptions.Center
 						: textAnimation.alignment == TextAnimation.TextAnimationAlignment.Right?
 							HorizontalAlignmentOptions.Right
 							: HorizontalAlignmentOptions.Left;
 
-				wordGraphics[i][0].horizontalAlignment = alignmentConfig;
+				if(textAnimation.haveBorder){
+					wordGraphics[i][0].font = textAnimation.font;
+					wordGraphics[i][0].fontMaterial = GetFontMaterial(textAnimation);
+					wordGraphics[i][0].gameObject.SetActive(true);
+					wordGraphics[i][0].fontSize = textAnimation.textSize;
+					wordGraphics[i][0].text = character;
+					wordGraphics[i][0].horizontalAlignment = alignmentConfig;
+				}
+				else
+					letters[i][0].gameObject.SetActive(false);
+
+				wordGraphics[i][1].font = textAnimation.font;
+				wordGraphics[i][1].fontSize = textAnimation.textSize;
+				wordGraphics[i][1].text = character;
 				wordGraphics[i][1].horizontalAlignment = alignmentConfig;
 
 				letterTransforms[i] = wordGraphics[i][0].transform.parent;
@@ -126,10 +132,11 @@ namespace PixelBattleText
 				letters = wordGraphics,
 				props = textAnimation,
 				startTime = Time.time,
-				pos = position.xy + new float2(alignmentOffset, 0),
+				pos = (position.xy + new float2(alignmentOffset, 0)),
 				active = false,
 			};
 
+			Debug.Log("alignment position: " + position.xy + new float2(alignmentOffset, 0));
 			animatedTexts.Add(animatedText);
 		}
 
@@ -177,41 +184,40 @@ namespace PixelBattleText
 					text.active = true;
 				}
 
+				//assume all letters have finished their transitions
+				//(this will be overwritten in case a letter with an active transition is found while evaluating their progress)
 				var allEnded = true;
-
+				
+				//setup all letters so they are in the correct position at current frame
 				for (int j = 0; j < letters.Length; j++)
 				{
+					//spacing and position
 					var letterStart =   start + delay * (props.invertDelay ? letters.Length - j : j);
 					var letterEnd = letterStart + duration;
 
+					//t is a frame independent progress counter (0-1) one or above means the transition has finished
 					var t = saturate(unlerp(letterStart, letterEnd, Time.time));
 
 					var pivotT = props.pivotCurve.Evaluate(t);
-					var letterPivot = new float2(lerp(props.initialLetterSpacing * j, props.finalLetterSpacing * j, pivotT),
-						0);
+					var letterPivot = new float2(
+						lerp(props.initialLetterSpacing * j, props.finalLetterSpacing * j, pivotT), 0);
 
 					var additivePosT = props.additivePosCurve.Evaluate(t);
 					var letterAdditivePos =
 						lerp(props.initialLetterAdditivePos, props.finalLetterAdditivePos, additivePosT);
 
-					transforms[j].position = float3(pos + letterPivot + letterAdditivePos, 0);
+					var pixelPosition = (pos + letterPivot + letterAdditivePos);
+					
+					transforms[j].GetComponent<RectTransform>().anchoredPosition = snapToPixelGrid? (float2)(int2)pixelPosition : pixelPosition;
 
 					letters[j][1].color = props.fillColorInTime.Evaluate(t);
-					letters[j][1].fontSize = props.textSize;
 					
+					//border color
 					if(props.haveBorder)
-					{
-						letters[j][0].gameObject.SetActive(true);
 						letters[j][0].color = props.borderColorInTime.Evaluate(t);
-						letters[j][0].fontSize = props.textSize;
-					}
-					else
-						letters[j][0].gameObject.SetActive(false);
 
 					if (t < 1)
-					{
 						allEnded = false;
-					}
 				}
 
 				if (allEnded)
@@ -230,7 +236,6 @@ namespace PixelBattleText
 			singleton = this;
 		}
 		
-		private GameObject textPrefab;
 		// Start is called before the first frame update
 		private  void Start()
 		{
@@ -239,6 +244,11 @@ namespace PixelBattleText
 			animatedTexts = new List<AnimatedTextInstace>();
 			borderShader = Shader.Find("Hidden/PixelBorder");
 			textPrefab = Resources.Load("pixel_text") as GameObject;
+
+			//set text prefab attached to the right lower corner of the canvas to simplify positioning calculations
+			var textPrefabTransform = textPrefab.GetComponent<RectTransform>();
+			textPrefabTransform.anchorMax = Vector2.zero;
+			textPrefabTransform.anchorMin = Vector2.zero;
 		}
 
 		private void Destroy(){
