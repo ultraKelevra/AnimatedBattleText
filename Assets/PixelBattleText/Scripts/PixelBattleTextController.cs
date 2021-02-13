@@ -11,14 +11,20 @@ using static Unity.Mathematics.math;
 
 namespace PixelBattleText
 {
+	///<summary>A singleton controller for displaying pixel perfect text animations</summary>
 	public class PixelBattleTextController : MonoBehaviour
 	{
-		private int _texelOffset_id = Shader.PropertyToID("_TexelOffset");
+		///<summary>Last instantiated PixelBattleTextController</summary>
 		public static PixelBattleTextController singleton;
 
-		///<summary>The root object on wich </summary>
+		///<summary>The parent object of the animated text.
+		///It's "pixel grid" will be taken as the base scale for calculating the positioning of each animation</summary>
 		public RectTransform canvas;
+		
+		///<summary>If its TRUE, This makes the text snap to the canvas "pixel grid".
+		///Useful for "chopping" animations that look too smooth if you need a more retro feeling.</summary>
 		public bool snapToPixelGrid;
+		
 		private Shader borderShader;
 		private List<TMP_Text[]> letters;
 		private Queue<TMP_Text[]> unusedLetters;
@@ -26,6 +32,7 @@ namespace PixelBattleText
 		private Dictionary<TextAnimation, Material> fontMaterials = new Dictionary<TextAnimation, Material>();
 		// private RectTransform canvasTransform;
 		private GameObject textPrefab;
+		private int _texelOffset_id = Shader.PropertyToID("_TexelOffset");
 
 		private TMP_Text[] GetNewText()
 		{
@@ -236,7 +243,8 @@ namespace PixelBattleText
 		{
 			if (singleton)
 				Destroy(this);
-			singleton = this;
+			else
+				singleton = this;
 		}
 		
 		// Start is called before the first frame update
