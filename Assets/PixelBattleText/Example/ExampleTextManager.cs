@@ -186,7 +186,6 @@ namespace AnimatedBattleText.Examples
 				criticalNumber,
 				textSpawnPosition);
 
-
 			PixelBattleTextController.DisplayText(
 				"CRITICAL!",
 				criticalText,
