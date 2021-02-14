@@ -28,7 +28,7 @@ namespace PixelBattleText
 		///<summary>The duration of the animation of one single letter.</summary>
 		public float transitionDuration = .5f;
 		///<summary>The delay of each letter.
-		///A letter can only start to animate once all previous letters have ended their delays and it's own.</summary>
+		///A letter can only start to animate once all previous letters have ended their delays and its own.</summary>
 		public float perLetterDelay = 0.05f;
 		///<summary>When TRUE, each letter start animating in the inverse order.
 		///(The animation direction isn't affected by this, only the order is affected)</summary>

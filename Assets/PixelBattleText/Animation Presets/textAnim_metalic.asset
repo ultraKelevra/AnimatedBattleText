@@ -45,11 +45,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   initialOffset:
-    x: -5
-    y: -2
+    x: 0
+    y: -4
   endOffset:
-    x: 5
-    y: 2
+    x: 0
+    y: 4
   offsetCurveX:
     serializedVersion: 2
     m_Curve:
@@ -87,7 +87,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.25
+      time: 0.14985657
       value: 1.5
       inSlope: 0
       outSlope: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.70000005
+      time: 0.44737554
       value: 1
       inSlope: 0
       outSlope: 0

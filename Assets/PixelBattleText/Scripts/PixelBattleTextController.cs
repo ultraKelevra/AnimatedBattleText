@@ -18,10 +18,10 @@ namespace PixelBattleText
 		public static PixelBattleTextController singleton;
 
 		///<summary>The parent object of the animated text.
-		///It's "pixel grid" will be taken as the base scale for calculating the positioning of each animation</summary>
+		///Its "pixel grid" will be taken as the base scale for calculating the positioning of each animation</summary>
 		public RectTransform canvas;
 		
-		///<summary>If its TRUE, This makes the text snap to the canvas "pixel grid".
+		///<summary>If it is TRUE, This makes the text snap to the canvas "pixel grid".
 		///Useful for "chopping" animations that look too smooth if you need a more retro feeling.</summary>
 		public bool snapToPixelGrid;
 		
@@ -36,6 +36,8 @@ namespace PixelBattleText
 
 		private TMP_Text[] GetNewText()
 		{
+		// 	canvas.rect
+		// 	RectTransformUtility.WorldToScreenPoint(canvas.rect, Camera.main.WorldToScreenPoint, )
 			TMP_Text[] text;
 			if (unusedLetters.Count == 0)
 			{
@@ -81,17 +83,32 @@ namespace PixelBattleText
 		}
 		
 		///<summary>
-		///Displays and animates an efimeral text UI element at a given position in 2D world space
+		///Displays and animates an efimeral text UI element at a given position in canvas world space
 		///</summary>
 		///<param name="word"> The string to display</param>
 		///<param name="textAnimation"> Parameters for animating every letter</param>
-		///<param name="position"> Position for where to display the text (world space)</param>
+		///<param name="position"> Position for where to display the text (canvas space)</param>
 		public static void DisplayText(string word, TextAnimation textAnimation, float3 position){
+#if UNITY_EDITOR
+			if(!singleton)
+			{
+				Debug.LogWarning("There is no PixelBattleController in the scene. Create one in order to use this function.\nThis error only logs in EDITOR MODE, in the project build this will just CRASH");
+				return;
+			}
+#endif
 			singleton._DisplayText(word, textAnimation, position);
 		}
 
 		private void _DisplayText(string word, TextAnimation textAnimation, float3 position)
 		{
+#if UNITY_EDITOR
+			if(!canvas)
+			{
+				Debug.LogWarning("The 'Canvas' field in the PixelBattleController is unassigned. Assigne it in order to use this function.\nThis error only logs in EDITOR MODE, in the project build this will just CRASH", this);
+				return;
+			}
+#endif
+
 			position.x *= canvas.rect.width;
 			position.y *= canvas.rect.height;
 			
