@@ -30,14 +30,11 @@ namespace PixelBattleText
 		private Queue<TMP_Text[]> unusedLetters;
 		private List<AnimatedTextInstace> animatedTexts = new List<AnimatedTextInstace>();
 		private Dictionary<TextAnimation, Material> fontMaterials = new Dictionary<TextAnimation, Material>();
-		// private RectTransform canvasTransform;
 		private GameObject textPrefab;
 		private int _texelOffset_id = Shader.PropertyToID("_TexelOffset");
 
 		private TMP_Text[] GetNewText()
 		{
-		// 	canvas.rect
-		// 	RectTransformUtility.WorldToScreenPoint(canvas.rect, Camera.main.WorldToScreenPoint, )
 			TMP_Text[] text;
 			if (unusedLetters.Count == 0)
 			{
@@ -270,9 +267,9 @@ namespace PixelBattleText
 			letters = new List<TMP_Text[]>();
 			unusedLetters = new Queue<TMP_Text[]>();
 			animatedTexts = new List<AnimatedTextInstace>();
-			borderShader = Shader.Find("Hidden/PixelBorder");
 			textPrefab = Resources.Load("pixel_text") as GameObject;
-
+			borderShader = (Shader)Resources.Load("PixelBorder");
+			
 			//set text prefab attached to the right lower corner of the canvas to simplify positioning calculations
 			var textPrefabTransform = textPrefab.GetComponent<RectTransform>();
 			textPrefabTransform.anchorMax = Vector2.zero;
@@ -283,6 +280,9 @@ namespace PixelBattleText
 			//destroy all created materials
 			foreach (var item in fontMaterials)
 				Destroy(item.Value);
+			
+			Resources.UnloadAsset(textPrefab);
+			Resources.UnloadAsset(borderShader);
 		}
 	}
 }
