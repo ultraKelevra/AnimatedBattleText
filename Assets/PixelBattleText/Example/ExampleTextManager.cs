@@ -189,7 +189,7 @@ namespace AnimatedBattleText.Examples
 			PixelBattleTextController.DisplayText(
 				"CRITICAL!",
 				criticalText,
-				textSpawnPosition + new float3(0,0.25f,0));
+				textSpawnPosition + new float3(0,0.15f,0));
 
 			lastUsed = criticalNumber;
 		}
