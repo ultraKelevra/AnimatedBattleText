@@ -193,7 +193,72 @@ namespace AnimatedBattleText.Examples
 
 			lastUsed = criticalNumber;
 		}
+		public delegate void DisplayText();
 
+		void Update(){
+			if(Input.GetKeyDown(KeyCode.Space)){
+				var randomPos = UnityEngine.Random.insideUnitCircle * new Vector2(.75f,.75f)+new Vector2(.5f,.5f);
+				textSpawnPosition = new float3(randomPos,0);
+				var randomMethod = UnityEngine.Random.Range(0,12);
+
+				switch(randomMethod)
+				{
+					case 0:{
+						DisplayCrit();
+					break;
+					}
+					case 1:{
+						DisplayDamage();
+					break;
+					}
+
+					case 2:{
+						DisplayFreeze();
+					break;
+					
+					}
+					case 3:{
+						DisplayHeal();
+					break;
+					}
+					case 4:{
+						DisplayKO();
+					break;
+
+					}
+					case 5:{
+						DisplayLvlUp();
+					break;
+					}
+					case 6:{
+						DisplayMetallic();
+					break;
+					}
+					case 7:{
+						DisplayPremium();
+					break;
+					}
+					case 8:{
+						DisplayPyro();
+					break;
+					}
+					case 9:{
+						DisplayShock();
+					break;
+					}
+					case 10:{
+						DisplaySpooky();
+					break;
+					}
+					case 11:{
+						DisplayVenom();
+					break;
+					}
+
+				}
+
+			}
+		}
 #endregion
 	}
 }
