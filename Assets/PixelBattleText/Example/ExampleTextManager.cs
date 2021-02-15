@@ -10,7 +10,7 @@ namespace AnimatedBattleText.Examples
 {
 	public class ExampleTextManager : MonoBehaviour
 	{
-		public float3 textSpawnPosition;
+		private float3 textSpawnPosition;
 		private TextAnimation lastUsed;
 
 		public TextAnimation ko;
@@ -39,6 +39,7 @@ namespace AnimatedBattleText.Examples
 		void Start()
 		{
 			lastUsed = lvlUp;
+			textSpawnPosition = new float3(0.5f,0.65f,0);
 		}
 
 		public Color[] outlineColors;
