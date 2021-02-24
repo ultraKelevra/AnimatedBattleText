@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
-using Unity.Mathematics;
 using TMPro;
 
 
 namespace PixelBattleText
 {
-	///<summary>A container for the parameters of a text animation that can be feed to a PixelBattleTextController to be displayed</summary>
+	///<summary>The parameters of a text animation that can be fed to a PixelBattleTextController in order to display animated text</summary>
 	[CreateAssetMenu(fileName = "newTextAnimation", menuName = "PixelBattleText/TextAnimation")]
 	public class TextAnimation: ScriptableObject
 	{
@@ -46,9 +45,9 @@ namespace PixelBattleText
 
 		[Header("Offset Animation")]
 		///<summary>Determines a vector (in canvas pixels) to be added to the pivot at the begining of the animation.</summary>
-		public int2 initialOffset = int2.zero;
+		public Vector2 initialOffset = Vector2.zero;
 		///<summary>Determines a vector (in canvas pixels) to be added to the pivot at the end of the animation.</summary>
-		public int2 endOffset = int2.zero;
+		public Vector2 endOffset = Vector2.zero;
 		///<summary>Determines the progress of the animation from Initial Offset to End Offset following a curve from 0 to 1, where 0 is the initial spacing and 1 the end.
 		///This only affects the X factor</summary>
 		public AnimationCurve offsetCurveX = AnimationCurve.Constant(0, 1, 1);

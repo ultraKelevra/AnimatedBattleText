@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Unity.Mathematics;
 using UnityEngine.UI;
 using PixelBattleText;
 using TMPro;
@@ -10,7 +7,7 @@ namespace AnimatedBattleText.Examples
 {
 	public class ExampleTextManager : MonoBehaviour
 	{
-		private float3 textSpawnPosition;
+		private Vector3 textSpawnPosition = new Vector3(.5f,.65f, 0);
 		private TextAnimation lastUsed;
 
 		public TextAnimation ko;
@@ -39,7 +36,7 @@ namespace AnimatedBattleText.Examples
 		void Start()
 		{
 			lastUsed = lvlUp;
-			textSpawnPosition = new float3(0.5f,0.65f,0);
+			textSpawnPosition = new Vector3(0.5f,0.65f,0);
 		}
 
 		public Color[] outlineColors;
@@ -190,7 +187,7 @@ namespace AnimatedBattleText.Examples
 			PixelBattleTextController.DisplayText(
 				"CRITICAL!",
 				criticalText,
-				textSpawnPosition + new float3(0,0.15f,0));
+				textSpawnPosition + new Vector3(0,0.15f,0));
 
 			lastUsed = criticalNumber;
 		}

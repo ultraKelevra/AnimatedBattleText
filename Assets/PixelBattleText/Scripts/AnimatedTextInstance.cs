@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System;
 using TMPro;
-using Unity.Mathematics;
-
 
 namespace PixelBattleText
 {
@@ -13,7 +11,7 @@ namespace PixelBattleText
         public TMP_Text[][] letters;
         public TextAnimation props;
         public float startTime;
-        public float2 pos;
+        public Vector2 pos;
         public bool animationFinished;
         public bool active;
     }

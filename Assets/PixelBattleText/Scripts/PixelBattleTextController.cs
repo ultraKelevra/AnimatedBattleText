@@ -1,13 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.U2D;
-using Unity.Mathematics;
-using UnityEngine.UI;
-using static Unity.Mathematics.math;
-
 
 namespace PixelBattleText
 {
@@ -85,7 +78,7 @@ namespace PixelBattleText
 		///<param name="word"> The string to display</param>
 		///<param name="textAnimation"> Parameters for animating every letter</param>
 		///<param name="position"> Position for where to display the text (canvas space)</param>
-		public static void DisplayText(string word, TextAnimation textAnimation, float3 position){
+		public static void DisplayText(string word, TextAnimation textAnimation, Vector2 position){
 #if UNITY_EDITOR
 			if(!singleton)
 			{
@@ -96,7 +89,7 @@ namespace PixelBattleText
 			singleton._DisplayText(word, textAnimation, position);
 		}
 
-		private void _DisplayText(string word, TextAnimation textAnimation, float3 position)
+		private void _DisplayText(string word, TextAnimation textAnimation, Vector2 position)
 		{
 #if UNITY_EDITOR
 			if(!canvas)
@@ -153,7 +146,7 @@ namespace PixelBattleText
 				letters = wordGraphics,
 				props = textAnimation,
 				startTime = Time.time,
-				pos = (position.xy + new float2(alignmentOffset, 0)),
+				pos = (position + new Vector2(alignmentOffset, 0)),
 				active = false,
 			};
 
@@ -216,23 +209,23 @@ namespace PixelBattleText
 					var letterEnd = letterStart + duration;
 
 					//t is a frame independent progress counter (0-1) one or above means the transition has finished
-					var t = saturate(unlerp(letterStart, letterEnd, Time.time));
+					var t = Mathf.Clamp01(Mathf.InverseLerp(letterStart, letterEnd, Time.time));
 
 					var pivotT = props.spacingCurve.Evaluate(t);
-					var letterPivot = new float2(
-						lerp(props.initialSpacing * j, props.endSpacing * j, pivotT), 0);
+					var letterPivot = new Vector2(
+						Mathf.Lerp(props.initialSpacing * j, props.endSpacing * j, pivotT), 0);
 
 					var additivePosXT = props.offsetCurveX.Evaluate(t);
 					var additivePosYT = props.offsetCurveY.Evaluate(t);
 
-					var additiveX = lerp(props.initialOffset.x, props.endOffset.x, additivePosXT);
-					var additiveY = lerp(props.initialOffset.y, props.endOffset.y, additivePosYT);
+					var additiveX = Mathf.Lerp(props.initialOffset.x, props.endOffset.x, additivePosXT);
+					var additiveY = Mathf.Lerp(props.initialOffset.y, props.endOffset.y, additivePosYT);
 
-					var letterAdditivePos = new float2(additiveX, additiveY);
+					var letterAdditivePos = new Vector2(additiveX, additiveY);
 
-					var pixelPosition = (pos + letterPivot + letterAdditivePos);
+					Vector2 pixelPosition = (pos + letterPivot + letterAdditivePos);
 					
-					transforms[j].GetComponent<RectTransform>().anchoredPosition = snapToPixelGrid? (float2)(int2)pixelPosition : pixelPosition;
+					transforms[j].GetComponent<RectTransform>().anchoredPosition = snapToPixelGrid? new Vector2( Mathf.Floor(pixelPosition.x), Mathf.Floor(pixelPosition.y)) : pixelPosition;
 
 					letters[j][1].color = props.fillColorInTime.Evaluate(t);
 					
