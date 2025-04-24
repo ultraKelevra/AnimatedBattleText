@@ -8,7 +8,7 @@ namespace PixelBattleText
 	public class PixelBattleTextController : MonoBehaviour
 	{
 		///<summary>Last instantiated PixelBattleTextController</summary>
-		public static PixelBattleTextController singleton;
+		private static PixelBattleTextController singleton;
 
 		///<summary>The parent object of the animated text.
 		///Its "pixel grid" will be taken as the base scale for calculating the positioning of each animation</summary>
@@ -42,10 +42,10 @@ namespace PixelBattleText
 			return text;
 		}
 
-				private Material GetFontMaterial(TextAnimation textAnimation)
+		private Material GetFontMaterial(TextAnimation textAnimation)
 		{
 #if UNITY_EDITOR
-			//if no material is related to this TextAnimation => generate it and realte to this TextAnimation
+			//if no material is related to this TextAnimation => generate it and attach to this TextAnimation
 			if(!fontMaterials.ContainsKey(textAnimation))
 				fontMaterials[textAnimation] = new Material(borderShader);
 			//Setup material (this is done every time the material is requested for picking up changes made in edit mode)
@@ -53,27 +53,15 @@ namespace PixelBattleText
 			//update material with font texture
 			mat.mainTexture = textAnimation.font.atlasTexture;
 			//set the texel relative size for keeping a constant 1px line (in font scale) at any text size
-			//(this is different to _MainTex_TexelSize as it has to rescale independent from TextSize field in TMPro_Text)
+			//(this is different to _MainTex_TexelSize as it has to rescale independent of TextSize field in TMPro_Text)
 			mat.SetFloat(_texelOffset_id, 1.0f / textAnimation.font.atlasHeight
 			* textAnimation.font.faceInfo.lineHeight / (float) textAnimation.textSize);
-			return mat;
-#else
-
-			if(!fontMaterials.ContainsKey(textAnimation))
-			{
-				var mat = new Material(borderShader);
-				mat.mainTexture = textAnimation.font.atlasTexture;
-				mat.SetFloat(_texelOffset_id, 1.0f / textAnimation.font.atlasHeight
-				* textAnimation.font.faceInfo.lineHeight / (float) textAnimation.textSize);
-				fontMaterials[textAnimation] = mat;
-			}
-			return fontMaterials[textAnimation];
-			
+			return mat;		
 #endif
 		}
 		
 		///<summary>
-		///Displays and animates an efimeral text UI element at a given position in canvas world space
+		///Displays and animates an ephemeral text UI element at a given position in canvas world space
 		///</summary>
 		///<param name="word"> The string to display</param>
 		///<param name="textAnimation"> Parameters for animating every letter</param>
@@ -94,7 +82,7 @@ namespace PixelBattleText
 #if UNITY_EDITOR
 			if(!canvas)
 			{
-				Debug.LogWarning("The 'Canvas' field in the PixelBattleController is unassigned. Assigne it in order to use this function.\nThis error only logs in EDITOR MODE, in the project build this will just CRASH", this);
+				Debug.LogWarning("The 'Canvas' field in the PixelBattleController is unassigned. Assign it in order to use this function.\nThis error only logs in EDITOR MODE, in the project build this will just CRASH", this);
 				return;
 			}
 #endif
